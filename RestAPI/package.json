@@ -1,0 +1,15 @@
+{
+  "name": "upscapp",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "start": "nodemon app.js"
+  },
+  "author": "Sagar Suman",
+  "license": "ISC",
+  "dependencies": {
+    "add-gitignore": "^1.1.1",
+    "express": "^4.17.1"
+  }
+}
