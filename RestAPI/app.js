@@ -9,6 +9,7 @@ mongoose
     pass: "5hblB7BuJEegUtDj",
     useNewUrlParser: true,
     useUnifiedTopology: true,
+    useFindAndModify: false,
   })
   .then(() => {
     console.log("MongoDB Connected");

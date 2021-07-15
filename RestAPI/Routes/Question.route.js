@@ -1,7 +1,9 @@
+const { response } = require("express");
 const express = require("express");
 const router = express.Router();
 const Question = require("../Models/Question.model");
 
+// find list of questions
 router.get("/", async (req, res, next) => {
   try {
     const results = await Question.find({}, { __v: 0 });
@@ -11,6 +13,7 @@ router.get("/", async (req, res, next) => {
   }
 });
 
+// post a question
 router.post("/", async (req, res, next) => {
   try {
     const question = new Question(req.body);
@@ -21,13 +24,38 @@ router.post("/", async (req, res, next) => {
   }
 });
 
-router.get("/:id", (req, res, next) => {
-  res.send("getting question by id");
+// get the question by id
+router.get("/:id", async (req, res, next) => {
+  const id = req.params.id;
+  try {
+    const question = await Question.findById(id);
+    res.send(question);
+  } catch (error) {
+    console.log(error.message);
+  }
 });
-router.patch("/:id", (req, res, next) => {
-  res.send("updating question by id");
+
+// update a question by id
+router.patch("/:id", async (req, res, next) => {
+  try {
+    const id = req.params.id;
+    const update = req.body;
+    const options = { new: true };
+    const result = await Question.findByIdAndUpdate(id, update, options);
+    res.send(result);
+  } catch (error) {
+    console.log(error.message);
+  }
 });
-router.delete("/:id", (req, res, next) => {
-  res.send("deleting question by id");
+
+// delete the question by id
+router.delete("/:id", async (req, res, next) => {
+  const id = req.params.id;
+  try {
+    const result = await Question.findByIdAndDelete(id);
+    res.send(result);
+  } catch (error) {
+    console.log(error.message);
+  }
 });
 module.exports = router;
