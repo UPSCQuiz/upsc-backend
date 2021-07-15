@@ -2,8 +2,13 @@ const express = require("express");
 const router = express.Router();
 const Question = require("../Models/Question.model");
 
-router.get("/", (req, res, next) => {
-  res.send("getting list of questions");
+router.get("/", async (req, res, next) => {
+  try {
+    const results = await Question.find({}, { __v: 0 });
+    res.send(results);
+  } catch (error) {
+    console.log(error.message);
+  }
 });
 
 router.post("/", async (req, res, next) => {
