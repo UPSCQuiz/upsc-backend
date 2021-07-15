@@ -1,5 +1,8 @@
 # To use these install Rest Client in vs code
 
+
+
+GET http://localhost:3000/
 ### getting list of questions
 GET http://localhost:3000/questions 
 
@@ -7,6 +10,18 @@ GET http://localhost:3000/questions
 
 ### creating a question
 POST http://localhost:3000/questions
+Content-Type: application/json
+
+{
+    "description": "this is test2 description of question",
+    "options": ["test2 option 1","test2 option 2","test2 option 3","test2 option 4"],
+    "correct_answer": "test2 correct answer",
+    "explanation":"test2 explanation",
+    "topic":"test2 topic",
+    "posted_by": "test2 user",
+    "likes": 1,
+    "dislikes": 0
+}
 
 
 ### Get a question by id
@@ -18,3 +33,15 @@ PATCH http://localhost:3000/questions/id
 
 ### Delete a question by id
 DELETE  http://localhost:3000/questions/id
+
+
+### question
+GET  http://localhost:3000/test/1415424
+### question
+POST  http://localhost:3000/test
+Content-Type: application/json
+
+{
+    "name":"878",
+    "description":"yeryerher"
+}
