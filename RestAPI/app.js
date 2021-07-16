@@ -1,27 +1,13 @@
 const express = require("express");
-const mongoose = require("mongoose");
 const createError = require("http-errors");
+const dotenv = require("dotenv").config();
 
 const app = express();
 
 app.use(express.json()); // middleware for post req Content-Type: application/json
-mongoose
-  .connect("mongodb+srv://cluster0.oj9le.mongodb.net/", {
-    dbName: "UPSCAppDatabase",
-    user: "sagarsuman1299",
-    pass: "5hblB7BuJEegUtDj",
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-    useFindAndModify: false,
-  })
-  .then(() => {
-    console.log("MongoDB Connected");
-  });
 
-app.all("/test", (req, res) => {
-  console.log(req.body);
-  res.send(req.body);
-});
+// initialize DB
+require("./initDB")();
 
 const QuestionRoute = require("./Routes/Question.route");
 app.use("/questions", QuestionRoute);
@@ -40,7 +26,7 @@ app.use((err, req, res, next) => {
     },
   });
 });
-
-app.listen(3000, () => {
-  console.log("Server started on port 3000");
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => {
+  console.log("Server started on port " + PORT);
 });
