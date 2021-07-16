@@ -16,12 +16,12 @@ POST http://localhost:3000/questions
 Content-Type: application/json
 
 {
-    "description": "this is test2 description of question",
-    "options": ["test2 option 1","test2 option 2","test2 option 3","test2 option 4"],
-    "correct_answer": "test2 correct answer",
-    "explanation":"test2 explanation",
-    "topic":"test2 topic",
-    "posted_by": "test2 user",
+    "description": "this is test3 description of question",
+    "options": ["test3 option 1","test3 option 2","test3 option 3","test3 option 4"],
+    "correct_answer": "test3 correct answer",
+    "explanation":"test3 explanation",
+    "topic":"test3 topic",
+    "posted_by": "test3 user",
     "likes": 1,
     "dislikes": 0
 }
