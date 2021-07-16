@@ -1,5 +1,8 @@
 const { response } = require("express");
 const express = require("express");
+const mongoose = require("mongoose");
+const createError = require("http-errors");
+
 const router = express.Router();
 const Question = require("../Models/Question.model");
 
@@ -21,6 +24,10 @@ router.post("/", async (req, res, next) => {
     res.send(result);
   } catch (error) {
     console.log(error.message);
+    if (error.name === "ValidationError") {
+      return next(createError(422, error.message));
+    }
+    next(error);
   }
 });
 
@@ -29,9 +36,16 @@ router.get("/:id", async (req, res, next) => {
   const id = req.params.id;
   try {
     const question = await Question.findById(id);
+    if (!question) {
+      throw createError(404, "Question donot exists");
+    }
     res.send(question);
   } catch (error) {
     console.log(error.message);
+    if (error instanceof mongoose.CastError) {
+      return next(createError(400, "Invalid Product id"));
+    }
+    next(error);
   }
 });
 
@@ -41,10 +55,19 @@ router.patch("/:id", async (req, res, next) => {
     const id = req.params.id;
     const update = req.body;
     const options = { new: true };
+
     const result = await Question.findByIdAndUpdate(id, update, options);
+    if (!result) {
+      throw createError(404, "Product does not exist");
+    }
     res.send(result);
   } catch (error) {
     console.log(error.message);
+    if (error instanceof mongoose.CastError) {
+      return next(createError(400, "Invalid Product id"));
+    } else {
+      next(error);
+    }
   }
 });
 
@@ -53,9 +76,17 @@ router.delete("/:id", async (req, res, next) => {
   const id = req.params.id;
   try {
     const result = await Question.findByIdAndDelete(id);
+    if (!result) {
+      throw createError(404, "Question donot exists");
+    }
     res.send(result);
   } catch (error) {
     console.log(error.message);
+    if (error instanceof mongoose.CastError) {
+      next(createError(400, "Invalid Product id"));
+      return;
+    }
+    next(error);
   }
 });
 module.exports = router;
