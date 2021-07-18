@@ -10,7 +10,10 @@ app.use(express.json()); // middleware for post req Content-Type: application/js
 require("./initDB")();
 
 const QuestionRoute = require("./Routes/Question.route");
-app.use("/questions", QuestionRoute);
+app.use("/api/questions", QuestionRoute);
+
+const UserRoute = require("./Routes/User.route");
+app.use("/api/user", UserRoute);
 
 // wrong end point error handling
 app.use((req, res, next) => {
