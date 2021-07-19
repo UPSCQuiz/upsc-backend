@@ -31,7 +31,7 @@ module.exports = {
     try {
       const question = await Question.findById(id);
       if (!question) {
-        throw createError(404, "Question donot exists");
+        throw createError(404, "Question does not exists");
       }
       res.send(question);
     } catch (error) {
