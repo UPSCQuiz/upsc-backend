@@ -6,13 +6,13 @@ GET http://localhost:3000/
 
 
 ### getting list of questions
-GET http://localhost:3000/questions 
+GET http://localhost:3000/api/questions 
 
 
 
 ### creating a question
 
-POST http://localhost:3000/questions
+POST http://localhost:3000/api/questions
 Content-Type: application/json
 
 {
@@ -29,13 +29,13 @@ Content-Type: application/json
 
 ### Get a question by id
 
-GET http://localhost:3000/questions/id
+GET http://localhost:3000/api/questions/id
 #e.g. id:60f0382ad91de80668e76d52
 
 
 ### Update a question by id
 
-PATCH http://localhost:3000/questions/60f0382ad91de80668e76d52
+PATCH http://localhost:3000/api/questions/60f0382ad91de80668e76d52
 Content-Type: application/json
 
 {
@@ -44,7 +44,7 @@ Content-Type: application/json
 
 ### Delete a question by id
 
-DELETE  http://localhost:3000/questions/60f055fab5cda6423c959dfe
+DELETE  http://localhost:3000/api/questions/60f055fab5cda6423c959dfe
 
 
 ### test
